@@ -80,7 +80,7 @@ function closeModal() {
 }
 
 // Handle form submission — sends to Google Sheets
-const GOOGLE_SHEET_URL = 'https://script.google.com/macros/s/AKfycbwwINOkeO1zSJRf_TX97Y3nXAs81uKRi1d7no--PXRBSzuNf5I_Dl0VwPEKkgV87msz/exec';
+const GOOGLE_SHEET_URL = 'https://script.google.com/macros/s/AKfycbwoAFON60CSRIrh6EKkb6CWHam7UMi3VbZey5lcDzt6DPoC5JNiAK5dhlp-445l610P/exec';
 
 signupForm.addEventListener('submit', (e) => {
   e.preventDefault();
