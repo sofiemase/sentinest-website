@@ -30,7 +30,7 @@ function initDecisionGraph() {
     contradict: { color: '#DC2626', width: 2, dash: '5,3' }
   };
 
-  // ========== Data ==========
+  // ========== 1. REAL CONVERSATION ==========
   const legitimateData = {
     nodes: [
       { id: 1, type: 'message', label: 'Hey mom, can you help me with Uber?', phase: 1 },
@@ -47,10 +47,12 @@ function initDecisionGraph() {
       { source: 4, target: 5, type: 'reply' },
       { source: 5, target: 6, type: 'reply' }
     ],
-    stats: { nodes: 6, phases: 1, switches: 0, contradictions: 0, timeline: '10 minutes' }
+    stats: { nodes: 6, phases: 1, switches: 0, contradictions: 0, timeline: '10 minutes' },
+    phaseLabels: null
   };
 
-  const scamData = {
+  // ========== 2. ROMANCE SCAM ==========
+  const romanceData = {
     nodes: [
       // Phase 1: Trust Building (Week 1)
       { id: 1, type: 'message', label: 'Hi! I saw your profile on Facebook Dating', phase: 1 },
@@ -60,14 +62,12 @@ function initDecisionGraph() {
       { id: 5, type: 'message', label: 'Tells stories about successful career', phase: 1 },
       { id: 6, type: 'message', label: 'Shares details about family', phase: 1 },
       { id: 7, type: 'message', label: 'Talks about future plans together', phase: 1 },
-
       // Phase 2: Channel Switch (Week 2)
       { id: 8, type: 'switch', label: 'Facebook Dating -> WhatsApp', phase: 2 },
       { id: 9, type: 'message', label: 'It\'s more private here, just us', phase: 2 },
       { id: 10, type: 'call', label: 'Voice call - accent varies', phase: 2 },
       { id: 11, type: 'message', label: 'Refuses video call - "camera broken"', phase: 2 },
       { id: 12, type: 'message', label: 'Claims to be traveling for work', phase: 2 },
-
       // Phase 3: Deepening (Weeks 3-5)
       { id: 13, type: 'message', label: 'I love you, we have a future', phase: 3 },
       { id: 14, type: 'message', label: 'Mentions investment opportunity', phase: 3 },
@@ -79,7 +79,6 @@ function initDecisionGraph() {
       { id: 20, type: 'message', label: 'Claims location is London (IP: Nigeria)', phase: 3 },
       { id: 21, type: 'switch', label: 'WhatsApp -> Phone calls', phase: 3 },
       { id: 22, type: 'message', label: 'More isolation: "this is between us"', phase: 3 },
-
       // Phase 4: Crisis / Pressure Spike (Week 6)
       { id: 23, type: 'message', label: '"I\'m in trouble in Dubai"', phase: 4 },
       { id: 24, type: 'message', label: '"I\'m scared, please help NOW"', phase: 4 },
@@ -93,20 +92,17 @@ function initDecisionGraph() {
       { id: 32, type: 'document', label: 'Sends "jail document" (forged)', phase: 4 }
     ],
     edges: [
-      // Linear flow
       { source: 1, target: 2, type: 'reply' },
       { source: 2, target: 3, type: 'reply' },
       { source: 3, target: 4, type: 'build' },
       { source: 4, target: 5, type: 'reply' },
       { source: 5, target: 6, type: 'build' },
       { source: 6, target: 7, type: 'build' },
-      // Channel switch
       { source: 7, target: 8, type: 'reply' },
       { source: 8, target: 9, type: 'reply' },
       { source: 9, target: 10, type: 'reply' },
       { source: 10, target: 11, type: 'reply' },
       { source: 11, target: 12, type: 'reply' },
-      // Deepening
       { source: 12, target: 13, type: 'reply' },
       { source: 13, target: 14, type: 'build' },
       { source: 14, target: 15, type: 'build' },
@@ -117,7 +113,6 @@ function initDecisionGraph() {
       { source: 19, target: 20, type: 'reply' },
       { source: 20, target: 21, type: 'reply' },
       { source: 21, target: 22, type: 'pressure' },
-      // Crisis
       { source: 22, target: 23, type: 'reply' },
       { source: 23, target: 24, type: 'pressure' },
       { source: 24, target: 25, type: 'pressure' },
@@ -129,23 +124,230 @@ function initDecisionGraph() {
       { source: 30, target: 31, type: 'pressure' },
       { source: 31, target: 32, type: 'build' },
       // Contradictions
-      { source: 3, target: 20, type: 'contradict' },  // Claims London vs IP Nigeria
-      { source: 5, target: 14, type: 'contradict' },  // Career story vs asking for money
-      { source: 6, target: 16, type: 'contradict' },  // Family details inconsistent
-      { source: 11, target: 18, type: 'contradict' },  // Always refuses video
-      // Cycles - returns to money topic
+      { source: 3, target: 20, type: 'contradict' },
+      { source: 5, target: 14, type: 'contradict' },
+      { source: 6, target: 16, type: 'contradict' },
+      { source: 11, target: 18, type: 'contradict' },
+      // Cycles
       { source: 14, target: 25, type: 'reference' },
       { source: 16, target: 23, type: 'reference' }
     ],
-    stats: { nodes: 321, phases: 4, switches: 2, contradictions: 8, timeline: '6 weeks' }
+    stats: { nodes: 321, phases: 4, switches: 2, contradictions: 8, timeline: '6 weeks' },
+    phaseLabels: {
+      1: { border: '#27AE60', label: 'Trust Building' },
+      2: { border: '#D97706', label: 'Channel Switch' },
+      3: { border: '#EA7B1E', label: 'Deepening' },
+      4: { border: '#DC2626', label: 'Crisis' }
+    }
   };
 
-  // Phase colors and labels
-  const phaseInfo = {
-    1: { color: '#E8F8F0', border: '#27AE60', label: 'Trust Building' },
-    2: { color: '#FFF7E6', border: '#D97706', label: 'Channel Switch' },
-    3: { color: '#FFF0E6', border: '#EA7B1E', label: 'Deepening' },
-    4: { color: '#FFF0F0', border: '#DC2626', label: 'Crisis' }
+  // ========== 3. RETAIL SCAM ==========
+  const retailData = {
+    nodes: [
+      // Phase 1: Bait (Day 1)
+      { id: 1, type: 'media', label: 'Instagram ad: "80% off Nike Air Max"', phase: 1 },
+      { id: 2, type: 'message', label: 'User clicks ad, lands on fake store', phase: 1 },
+      { id: 3, type: 'media', label: 'Professional-looking product photos (stolen)', phase: 1 },
+      { id: 4, type: 'message', label: '"Only 3 left in stock!" countdown timer', phase: 1 },
+      { id: 5, type: 'message', label: 'Fake 5-star reviews with stock photo avatars', phase: 1 },
+      // Phase 2: Checkout Pressure (Day 1)
+      { id: 6, type: 'message', label: '"Sale ends in 00:14:32" — fake timer', phase: 2 },
+      { id: 7, type: 'message', label: '"12 people viewing this item now"', phase: 2 },
+      { id: 8, type: 'document', label: 'Checkout page asks for full card details', phase: 2 },
+      { id: 9, type: 'message', label: 'No PayPal or secure payment options', phase: 2 },
+      { id: 10, type: 'message', label: '"Add $9.99 for shipping protection"', phase: 2 },
+      // Phase 3: Post-Purchase (Days 2-7)
+      { id: 11, type: 'message', label: 'Order confirmation email (spoofed branding)', phase: 3 },
+      { id: 12, type: 'document', label: 'Fake tracking number provided', phase: 3 },
+      { id: 13, type: 'message', label: 'Tracking shows "in transit" for 2 weeks', phase: 3 },
+      { id: 14, type: 'message', label: 'User emails support — no response', phase: 3 },
+      { id: 15, type: 'switch', label: 'Tries Instagram DM — account deleted', phase: 3 },
+      // Phase 4: Escalation (Day 14+)
+      { id: 16, type: 'message', label: 'Item never arrives', phase: 4 },
+      { id: 17, type: 'message', label: 'Website domain now offline', phase: 4 },
+      { id: 18, type: 'message', label: 'Credit card charged second time', phase: 4 },
+      { id: 19, type: 'message', label: 'Unauthorized charges appear on card', phase: 4 }
+    ],
+    edges: [
+      { source: 1, target: 2, type: 'reply' },
+      { source: 2, target: 3, type: 'build' },
+      { source: 3, target: 4, type: 'pressure' },
+      { source: 3, target: 5, type: 'build' },
+      { source: 4, target: 6, type: 'pressure' },
+      { source: 5, target: 6, type: 'build' },
+      { source: 6, target: 7, type: 'pressure' },
+      { source: 7, target: 8, type: 'reply' },
+      { source: 8, target: 9, type: 'reply' },
+      { source: 9, target: 10, type: 'pressure' },
+      { source: 10, target: 11, type: 'reply' },
+      { source: 11, target: 12, type: 'build' },
+      { source: 12, target: 13, type: 'reply' },
+      { source: 13, target: 14, type: 'reply' },
+      { source: 14, target: 15, type: 'reply' },
+      { source: 15, target: 16, type: 'reply' },
+      { source: 16, target: 17, type: 'build' },
+      { source: 17, target: 18, type: 'pressure' },
+      { source: 18, target: 19, type: 'pressure' },
+      // Contradictions
+      { source: 3, target: 17, type: 'contradict' },  // Pro site vs domain disappears
+      { source: 5, target: 14, type: 'contradict' },  // Great reviews vs no support
+      { source: 12, target: 16, type: 'contradict' }   // Tracking vs no delivery
+    ],
+    stats: { nodes: 19, phases: 4, switches: 1, contradictions: 3, timeline: '2 weeks' },
+    phaseLabels: {
+      1: { border: '#27AE60', label: 'Bait' },
+      2: { border: '#D97706', label: 'Checkout Pressure' },
+      3: { border: '#EA7B1E', label: 'Post-Purchase' },
+      4: { border: '#DC2626', label: 'Escalation' }
+    }
+  };
+
+  // ========== 4. TECH SUPPORT SCAM ==========
+  const techSupportData = {
+    nodes: [
+      // Phase 1: Initial Scare
+      { id: 1, type: 'media', label: 'Browser popup: "YOUR COMPUTER IS INFECTED"', phase: 1 },
+      { id: 2, type: 'message', label: 'Fake Microsoft logo and warning sounds', phase: 1 },
+      { id: 3, type: 'message', label: '"Call 1-800-XXX-XXXX immediately"', phase: 1 },
+      { id: 4, type: 'message', label: 'Browser locked — can\'t close tab', phase: 1 },
+      // Phase 2: Fake Diagnosis
+      { id: 5, type: 'call', label: 'Victim calls — "Microsoft Tech Support"', phase: 2 },
+      { id: 6, type: 'message', label: '"Let me check your system remotely"', phase: 2 },
+      { id: 7, type: 'message', label: 'Asks victim to install AnyDesk/TeamViewer', phase: 2 },
+      { id: 8, type: 'message', label: 'Opens Event Viewer — "Look at all these errors!"', phase: 2 },
+      { id: 9, type: 'document', label: 'Shows normal logs as "critical threats"', phase: 2 },
+      { id: 10, type: 'message', label: '"Your bank accounts are at risk"', phase: 2 },
+      // Phase 3: Payment Extraction
+      { id: 11, type: 'message', label: '"Our protection plan is $299/year"', phase: 3 },
+      { id: 12, type: 'message', label: '"But for you today, only $199"', phase: 3 },
+      { id: 13, type: 'message', label: '"I need your card to process this now"', phase: 3 },
+      { id: 14, type: 'switch', label: 'Phone -> remote desktop access', phase: 3 },
+      { id: 15, type: 'message', label: 'Navigates to banking site while connected', phase: 3 },
+      { id: 16, type: 'message', label: '"I accidentally refunded you $1,999"', phase: 3 },
+      // Phase 4: Double Extraction
+      { id: 17, type: 'message', label: '"You need to send back the overpayment"', phase: 4 },
+      { id: 18, type: 'message', label: '"Buy gift cards and read me the codes"', phase: 4 },
+      { id: 19, type: 'message', label: '"I\'ll lose my job if you don\'t help"', phase: 4 },
+      { id: 20, type: 'message', label: '"Please don\'t tell anyone about this"', phase: 4 },
+      { id: 21, type: 'message', label: 'Victim sends $1,999 in gift cards', phase: 4 }
+    ],
+    edges: [
+      { source: 1, target: 2, type: 'build' },
+      { source: 2, target: 3, type: 'pressure' },
+      { source: 3, target: 4, type: 'pressure' },
+      { source: 4, target: 5, type: 'reply' },
+      { source: 5, target: 6, type: 'reply' },
+      { source: 6, target: 7, type: 'reply' },
+      { source: 7, target: 8, type: 'build' },
+      { source: 8, target: 9, type: 'build' },
+      { source: 9, target: 10, type: 'pressure' },
+      { source: 10, target: 11, type: 'reply' },
+      { source: 11, target: 12, type: 'pressure' },
+      { source: 12, target: 13, type: 'pressure' },
+      { source: 13, target: 14, type: 'reply' },
+      { source: 14, target: 15, type: 'build' },
+      { source: 15, target: 16, type: 'build' },
+      { source: 16, target: 17, type: 'pressure' },
+      { source: 17, target: 18, type: 'pressure' },
+      { source: 18, target: 19, type: 'pressure' },
+      { source: 19, target: 20, type: 'pressure' },
+      { source: 20, target: 21, type: 'reply' },
+      // Contradictions
+      { source: 2, target: 9, type: 'contradict' },   // Fake Microsoft vs normal logs
+      { source: 11, target: 16, type: 'contradict' },  // $199 plan vs $1999 "refund"
+      { source: 5, target: 18, type: 'contradict' }    // "Microsoft" asking for gift cards
+    ],
+    stats: { nodes: 21, phases: 4, switches: 1, contradictions: 3, timeline: '2 hours' },
+    phaseLabels: {
+      1: { border: '#DC2626', label: 'Initial Scare' },
+      2: { border: '#EA7B1E', label: 'Fake Diagnosis' },
+      3: { border: '#D97706', label: 'Payment Extraction' },
+      4: { border: '#DC2626', label: 'Double Extraction' }
+    }
+  };
+
+  // ========== 5. INVESTMENT / PIG BUTCHERING SCAM ==========
+  const investmentData = {
+    nodes: [
+      // Phase 1: Social Approach (Week 1-2)
+      { id: 1, type: 'message', label: '"Wrong number" text or LinkedIn message', phase: 1 },
+      { id: 2, type: 'message', label: 'Casual conversation — lifestyle, travel', phase: 1 },
+      { id: 3, type: 'media', label: 'Shares photos of luxury lifestyle', phase: 1 },
+      { id: 4, type: 'message', label: '"I made my money through crypto trading"', phase: 1 },
+      { id: 5, type: 'message', label: 'Mentions trading platform casually', phase: 1 },
+      // Phase 2: Trust & Platform Setup (Week 3-4)
+      { id: 6, type: 'switch', label: 'LinkedIn -> WhatsApp', phase: 2 },
+      { id: 7, type: 'message', label: '"Let me show you how I trade"', phase: 2 },
+      { id: 8, type: 'media', label: 'Screenshots of "profits" (fabricated)', phase: 2 },
+      { id: 9, type: 'message', label: '"Start small — just try $500"', phase: 2 },
+      { id: 10, type: 'document', label: 'Sends link to fake trading platform', phase: 2 },
+      { id: 11, type: 'message', label: 'Victim deposits $500 — sees "gains"', phase: 2 },
+      // Phase 3: Escalating Deposits (Week 5-8)
+      { id: 12, type: 'message', label: '"You made $150! Imagine with $5,000"', phase: 3 },
+      { id: 13, type: 'message', label: '"Special opportunity this week only"', phase: 3 },
+      { id: 14, type: 'message', label: 'Victim deposits $5,000', phase: 3 },
+      { id: 15, type: 'message', label: 'Platform shows $8,200 "balance"', phase: 3 },
+      { id: 16, type: 'message', label: '"Big opportunity — put in $20,000"', phase: 3 },
+      { id: 17, type: 'message', label: '"I\'m putting in $50K myself"', phase: 3 },
+      { id: 18, type: 'message', label: 'Victim deposits $20,000', phase: 3 },
+      { id: 19, type: 'message', label: 'Platform shows $45,000 "balance"', phase: 3 },
+      // Phase 4: The Trap (Week 9+)
+      { id: 20, type: 'message', label: 'Victim tries to withdraw', phase: 4 },
+      { id: 21, type: 'message', label: '"You need to pay 15% tax to withdraw"', phase: 4 },
+      { id: 22, type: 'document', label: 'Fake "tax form" sent', phase: 4 },
+      { id: 23, type: 'message', label: '"Pay $6,750 tax to unlock your funds"', phase: 4 },
+      { id: 24, type: 'message', label: 'Victim pays "tax" — nothing unlocks', phase: 4 },
+      { id: 25, type: 'message', label: '"Additional verification fee required"', phase: 4 },
+      { id: 26, type: 'message', label: 'Platform goes offline. Contact disappears.', phase: 4 }
+    ],
+    edges: [
+      { source: 1, target: 2, type: 'reply' },
+      { source: 2, target: 3, type: 'build' },
+      { source: 3, target: 4, type: 'build' },
+      { source: 4, target: 5, type: 'build' },
+      { source: 5, target: 6, type: 'reply' },
+      { source: 6, target: 7, type: 'reply' },
+      { source: 7, target: 8, type: 'build' },
+      { source: 8, target: 9, type: 'pressure' },
+      { source: 9, target: 10, type: 'build' },
+      { source: 10, target: 11, type: 'reply' },
+      { source: 11, target: 12, type: 'reply' },
+      { source: 12, target: 13, type: 'pressure' },
+      { source: 13, target: 14, type: 'reply' },
+      { source: 14, target: 15, type: 'build' },
+      { source: 15, target: 16, type: 'pressure' },
+      { source: 16, target: 17, type: 'build' },
+      { source: 17, target: 18, type: 'reply' },
+      { source: 18, target: 19, type: 'build' },
+      { source: 19, target: 20, type: 'reply' },
+      { source: 20, target: 21, type: 'pressure' },
+      { source: 21, target: 22, type: 'build' },
+      { source: 22, target: 23, type: 'pressure' },
+      { source: 23, target: 24, type: 'reply' },
+      { source: 24, target: 25, type: 'pressure' },
+      { source: 25, target: 26, type: 'reply' },
+      // Contradictions
+      { source: 3, target: 26, type: 'contradict' },   // Luxury lifestyle vs disappears
+      { source: 8, target: 19, type: 'contradict' },   // Fake profits vs can't withdraw
+      { source: 11, target: 21, type: 'contradict' },   // Easy deposit vs impossible withdraw
+      { source: 15, target: 26, type: 'contradict' }    // $45K balance vs platform offline
+    ],
+    stats: { nodes: 26, phases: 4, switches: 1, contradictions: 4, timeline: '9 weeks' },
+    phaseLabels: {
+      1: { border: '#27AE60', label: 'Social Approach' },
+      2: { border: '#D97706', label: 'Platform Setup' },
+      3: { border: '#EA7B1E', label: 'Escalating Deposits' },
+      4: { border: '#DC2626', label: 'The Trap' }
+    }
+  };
+
+  // Map graph names to data
+  const graphDataMap = {
+    legitimate: legitimateData,
+    romance: romanceData,
+    retail: retailData,
+    techsupport: techSupportData,
+    investment: investmentData
   };
 
   let currentGraph = 'legitimate';
@@ -192,33 +394,31 @@ function initDecisionGraph() {
     const nodes = data.nodes.map((d, i) => ({ ...d, x: width / 2, y: height / 2 }));
     const edges = data.edges.map(d => ({ ...d }));
 
-    // Phase regions for scam graph
-    const isScam = data === scamData;
+    const isSimple = data === legitimateData;
+    const hasPhases = data.phaseLabels !== null;
+    const phaseCount = hasPhases ? Object.keys(data.phaseLabels).length : 1;
 
     // Force simulation
-    const phaseCount = isScam ? 4 : 1;
-    const phaseWidth = width / phaseCount;
-
     simulation = d3.forceSimulation(nodes)
-      .force('link', d3.forceLink(edges).id(d => d.id).distance(isScam ? 50 : 80))
-      .force('charge', d3.forceManyBody().strength(isScam ? -120 : -200))
-      .force('collide', d3.forceCollide(isScam ? 16 : 22));
+      .force('link', d3.forceLink(edges).id(d => d.id).distance(isSimple ? 80 : 50))
+      .force('charge', d3.forceManyBody().strength(isSimple ? -200 : -100))
+      .force('collide', d3.forceCollide(isSimple ? 22 : 14));
 
-    if (isScam) {
-      simulation.force('x', d3.forceX(d => {
-        return ((d.phase - 0.5) / phaseCount) * width;
-      }).strength(0.4));
-      simulation.force('y', d3.forceY(height / 2).strength(0.15));
-    } else {
+    if (isSimple) {
       simulation.force('x', d3.forceX((d, i) => {
         return (width * 0.15) + (i / (nodes.length - 1)) * (width * 0.7);
       }).strength(0.8));
       simulation.force('y', d3.forceY(height * 0.45).strength(0.8));
+    } else {
+      simulation.force('x', d3.forceX(d => {
+        return ((d.phase - 0.5) / phaseCount) * width;
+      }).strength(0.4));
+      simulation.force('y', d3.forceY(height / 2).strength(0.15));
     }
 
-    // Phase background labels for scam
-    if (isScam) {
-      Object.entries(phaseInfo).forEach(([phase, info]) => {
+    // Phase background labels
+    if (hasPhases) {
+      Object.entries(data.phaseLabels).forEach(([phase, info]) => {
         const px = ((parseInt(phase) - 0.5) / phaseCount) * width;
         g.append('text')
           .attr('x', px)
@@ -248,6 +448,7 @@ function initDecisionGraph() {
       .on('mouseleave', hideTooltip);
 
     // Draw nodes
+    const nodeR = isSimple ? 12 : 8;
     const node = g.selectAll('.node')
       .data(nodes)
       .enter()
@@ -261,10 +462,9 @@ function initDecisionGraph() {
     // Node shapes
     node.each(function(d) {
       const el = d3.select(this);
-      const r = isScam ? 8 : 12;
+      const r = nodeR;
 
       if (d.type === 'document') {
-        // Diamond
         el.append('rect')
           .attr('width', r * 1.4)
           .attr('height', r * 1.4)
@@ -276,7 +476,6 @@ function initDecisionGraph() {
           .attr('stroke', '#fff')
           .attr('stroke-width', 1.5);
       } else if (d.type === 'switch') {
-        // Hexagon-ish (larger circle with ring)
         el.append('circle')
           .attr('r', r + 2)
           .attr('fill', 'none')
@@ -286,7 +485,6 @@ function initDecisionGraph() {
           .attr('r', r - 1)
           .attr('fill', nodeColors[d.type]);
       } else {
-        // Circle for message, call, media
         el.append('circle')
           .attr('r', r)
           .attr('fill', nodeColors[d.type])
@@ -294,7 +492,6 @@ function initDecisionGraph() {
           .attr('stroke-width', 1.5);
       }
 
-      // Icon for call nodes
       if (d.type === 'call') {
         el.append('text')
           .attr('text-anchor', 'middle')
@@ -324,9 +521,10 @@ function initDecisionGraph() {
     });
 
     // Stats annotation
-    const statsText = isScam
-      ? `Full graph: ${data.stats.nodes} nodes \u00B7 ${data.stats.phases} phases \u00B7 ${data.stats.switches} channel switches \u00B7 ${data.stats.contradictions} contradictions \u00B7 ${data.stats.timeline}`
-      : `${data.stats.nodes} nodes \u00B7 Linear flow \u00B7 ${data.stats.switches} channel switches \u00B7 ${data.stats.contradictions} contradictions \u00B7 ${data.stats.timeline}`;
+    const s = data.stats;
+    const statsText = isSimple
+      ? `${s.nodes} nodes \u00B7 Linear flow \u00B7 ${s.switches} channel switches \u00B7 ${s.contradictions} contradictions \u00B7 ${s.timeline}`
+      : `${s.nodes} nodes \u00B7 ${s.phases} phases \u00B7 ${s.switches} channel switches \u00B7 ${s.contradictions} contradictions \u00B7 ${s.timeline}`;
 
     g.append('text')
       .attr('x', width / 2)
@@ -377,7 +575,7 @@ function initDecisionGraph() {
       if (type !== currentGraph) {
         currentGraph = type;
         if (simulation) simulation.stop();
-        renderGraph(type === 'legitimate' ? legitimateData : scamData);
+        renderGraph(graphDataMap[type]);
       }
     });
   });
@@ -411,7 +609,7 @@ function initDecisionGraph() {
     resizeTimer = setTimeout(() => {
       const newWidth = container.clientWidth;
       if (Math.abs(newWidth - width) > 50) {
-        location.reload(); // Simple approach for resize
+        location.reload();
       }
     }, 300);
   });

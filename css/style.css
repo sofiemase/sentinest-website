@@ -719,6 +719,7 @@ img { max-width: 100%; }
   justify-content: center;
   gap: var(--space-sm);
   margin-bottom: var(--space-xl);
+  flex-wrap: wrap;
 }
 
 .graph-toggle__btn {
