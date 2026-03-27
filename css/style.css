@@ -721,6 +721,57 @@ img { max-width: 100%; }
   line-height: 1.7;
 }
 
+/* ========== Differentiators ========== */
+.differentiators {
+  background: var(--color-bg);
+}
+
+.diff-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-lg);
+}
+
+.diff-card {
+  background: var(--color-white);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  border-radius: var(--border-radius);
+  padding: var(--space-xl);
+  border-top: 3px solid var(--color-primary);
+}
+
+.diff-card__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--color-surface);
+  color: var(--color-primary);
+  margin-bottom: var(--space-md);
+}
+
+.diff-card__title {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--color-ink);
+  margin-bottom: var(--space-sm);
+}
+
+.diff-card__desc {
+  font-size: var(--body-size-sm);
+  color: var(--color-ink);
+  opacity: 0.65;
+  line-height: 1.7;
+}
+
+@media (max-width: 768px) {
+  .diff-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
 /* ========== Decision Graph ========== */
 .decision-graph {
   background: var(--color-bg);
