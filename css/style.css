@@ -603,22 +603,22 @@ img { max-width: 100%; }
 }
 
 .tier--low {
-  background: rgba(39, 174, 96, 0.08);
+  background: rgba(39, 174, 96, 0.15);
   border-left-color: var(--color-accent);
 }
 
 .tier--medium {
-  background: rgba(217, 119, 6, 0.1);
+  background: rgba(217, 119, 6, 0.15);
   border-left-color: var(--color-warning);
 }
 
 .tier--high {
-  background: rgba(234, 123, 30, 0.12);
+  background: rgba(234, 123, 30, 0.18);
   border-left-color: var(--color-high-risk);
 }
 
 .tier--critical {
-  background: rgba(220, 38, 38, 0.1);
+  background: rgba(220, 38, 38, 0.15);
   border-left-color: var(--color-critical);
 }
 
@@ -1217,22 +1217,22 @@ img { max-width: 100%; }
 }
 
 .mri-ref__tier--low {
-  background: rgba(39, 174, 96, 0.08);
+  background: rgba(39, 174, 96, 0.15);
   border-left-color: var(--color-accent);
 }
 
 .mri-ref__tier--medium {
-  background: rgba(217, 119, 6, 0.1);
+  background: rgba(217, 119, 6, 0.15);
   border-left-color: var(--color-warning);
 }
 
 .mri-ref__tier--high {
-  background: rgba(234, 123, 30, 0.12);
+  background: rgba(234, 123, 30, 0.18);
   border-left-color: var(--color-high-risk);
 }
 
 .mri-ref__tier--critical {
-  background: rgba(220, 38, 38, 0.1);
+  background: rgba(220, 38, 38, 0.15);
   border-left-color: var(--color-critical);
 }
 
