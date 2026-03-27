@@ -706,13 +706,49 @@ function initDecisionGraph() {
     }
   }, 2000);
 
+  // Fullscreen toggle
+  const graphContainer = document.getElementById('graphContainer');
+  const fullscreenBtn = document.getElementById('graphFullscreenBtn');
+  const fullscreenLabel = fullscreenBtn.querySelector('span');
+  const fullscreenIcon = fullscreenBtn.querySelector('svg');
+
+  fullscreenBtn.addEventListener('click', () => {
+    const isFullscreen = graphContainer.classList.toggle('fullscreen');
+    fullscreenLabel.textContent = isFullscreen ? 'Exit' : 'Fullscreen';
+    fullscreenIcon.innerHTML = isFullscreen
+      ? '<path d="M4 14h6m0 0v6m0-6L3 21M20 10h-6m0 0V4m0 6l7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>'
+      : '<path d="M8 3H5a2 2 0 00-2 2v3m18 0V5a2 2 0 00-2-2h-3m0 18h3a2 2 0 002-2v-3M3 16v3a2 2 0 002 2h3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>';
+    document.body.style.overflow = isFullscreen ? 'hidden' : '';
+
+    // Re-render graph at new size
+    if (simulation) simulation.stop();
+    setTimeout(() => {
+      const newWidth = container.clientWidth;
+      const newHeight = container.clientHeight;
+      // Update the SVG viewBox to match new dimensions
+      const svgEl = container.querySelector('svg');
+      if (svgEl) {
+        svgEl.setAttribute('width', newWidth);
+        svgEl.setAttribute('height', newHeight);
+        svgEl.setAttribute('viewBox', `0 0 ${newWidth} ${newHeight}`);
+      }
+    }, 50);
+  });
+
+  // Escape key to exit fullscreen
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && graphContainer.classList.contains('fullscreen')) {
+      fullscreenBtn.click();
+    }
+  });
+
   // Handle resize
   let resizeTimer;
   window.addEventListener('resize', () => {
     clearTimeout(resizeTimer);
     resizeTimer = setTimeout(() => {
       const newWidth = container.clientWidth;
-      if (Math.abs(newWidth - width) > 50) {
+      if (Math.abs(newWidth - width) > 50 && !graphContainer.classList.contains('fullscreen')) {
         location.reload();
       }
     }, 300);
