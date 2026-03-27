@@ -174,9 +174,27 @@ signupForm.addEventListener('submit', (e) => {
     }, 3000);
   }
 
-  fetch(url, { mode: 'no-cors' })
-    .then(() => showSuccess())
-    .catch(() => showSuccess());
+  function resetBtn() {
+    submitBtn.textContent = 'Join the waitlist';
+    submitBtn.disabled = false;
+  }
+
+  fetch(url, { redirect: 'follow' })
+    .then(res => res.json())
+    .then(data => {
+      if (data.status === 'duplicate') {
+        showFieldError('email', 'This email is already on the waitlist');
+        resetBtn();
+      } else {
+        showSuccess();
+      }
+    })
+    .catch(() => {
+      // If CORS blocks the response, fall back to no-cors and assume success
+      fetch(url, { mode: 'no-cors' })
+        .then(() => showSuccess())
+        .catch(() => showSuccess());
+    });
 });
 
 // Clear errors on input
