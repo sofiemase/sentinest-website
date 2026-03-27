@@ -23,7 +23,6 @@
         <a href="#science">For platforms</a>
         <a href="#decision-graph">Research</a>
         <a href="#testimonials">Testimonials</a>
-        <a href="#" class="nav__signin">Sign in</a>
         <button class="btn btn--primary btn--sm" id="openSignup">Get early access</button>
       </div>
     </nav>
@@ -300,7 +299,16 @@
             <span class="graph-legend__item"><span class="graph-legend__line graph-legend__line--build"></span>Build</span>
           </div>
         </div>
-        <div id="graphSvg" class="graph-svg"></div>
+        <div class="graph-interact-wrapper" id="graphInteractWrapper">
+          <div class="graph-interact-overlay" id="graphOverlay">
+            <div class="graph-interact-prompt">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 15l-2 5L9 9l11 4-5 2z"/><path d="M14.828 14.828L21 21"/></svg>
+              <span>Click to investigate graph</span>
+            </div>
+          </div>
+          <button class="graph-exit-btn" id="graphExitBtn">✕ Exit investigation</button>
+          <div id="graphSvg" class="graph-svg"></div>
+        </div>
         <div class="graph-tooltip" id="graphTooltip"></div>
       </div>
 

@@ -1050,6 +1050,100 @@ img { max-width: 100%; }
   background: rgba(0, 0, 0, 0.3);
 }
 
+/* Interact wrapper and overlay */
+.graph-interact-wrapper {
+  position: relative;
+}
+
+.graph-interact-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  background: rgba(250, 252, 251, 0.4);
+  transition: all var(--transition-base);
+}
+
+.graph-interact-overlay:hover {
+  background: rgba(250, 252, 251, 0.6);
+}
+
+.graph-interact-overlay.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.graph-interact-prompt {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: 10px 20px;
+  background: var(--color-white);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: var(--border-radius-pill);
+  box-shadow: var(--shadow-md);
+  font-size: var(--body-size-sm);
+  font-weight: 600;
+  color: var(--color-primary);
+  transition: all var(--transition-fast);
+}
+
+.graph-interact-overlay:hover .graph-interact-prompt {
+  background: var(--color-primary);
+  color: var(--color-white);
+  border-color: var(--color-primary);
+}
+
+.graph-interact-overlay:hover .graph-interact-prompt svg {
+  stroke: white;
+}
+
+/* When graph is NOT active — disable interaction on the SVG */
+.graph-interact-wrapper:not(.active) .graph-svg {
+  pointer-events: none;
+}
+
+/* When graph is active (investigating) */
+.graph-interact-wrapper.active .graph-svg {
+  pointer-events: auto;
+  outline: 2px solid var(--color-primary);
+  outline-offset: -2px;
+  border-radius: var(--border-radius-sm);
+}
+
+.graph-exit-btn {
+  display: none;
+  position: absolute;
+  top: var(--space-sm);
+  left: var(--space-sm);
+  z-index: 5;
+  padding: 5px 12px;
+  background: var(--color-ink);
+  color: var(--color-white);
+  border: none;
+  border-radius: var(--border-radius-pill);
+  font-family: var(--font-family);
+  font-size: 11px;
+  font-weight: 600;
+  cursor: pointer;
+  opacity: 0.8;
+  transition: opacity var(--transition-fast);
+}
+
+.graph-exit-btn:hover {
+  opacity: 1;
+}
+
+.graph-interact-wrapper.active .graph-exit-btn {
+  display: block;
+}
+
 .graph-svg svg {
   min-width: 100%;
   min-height: 100%;
@@ -1787,7 +1881,16 @@ img { max-width: 100%; }
   }
 
   .graph-svg {
-    height: 320px;
+    height: 350px;
+  }
+
+  .graph-toggle {
+    flex-wrap: wrap;
+  }
+
+  .graph-interact-prompt {
+    font-size: 12px;
+    padding: 8px 16px;
   }
 
   .cta-banner {
@@ -1846,7 +1949,20 @@ img { max-width: 100%; }
   }
 
   .graph-svg {
-    height: 280px;
+    height: 300px;
+  }
+
+  .graph-container {
+    padding: var(--space-md);
+  }
+
+  .graph-legend {
+    font-size: 10px;
+    gap: var(--space-xs);
+  }
+
+  .graph-legend__section {
+    gap: var(--space-sm);
   }
 
   .cta-banner__buttons {

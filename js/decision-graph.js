@@ -797,6 +797,7 @@ function initDecisionGraph() {
       if (type !== currentGraph) {
         currentGraph = type;
         if (simulation) simulation.stop();
+        resetInvestigateMode();
         renderGraph(graphDataMap[type]);
       }
     });
@@ -823,6 +824,46 @@ function initDecisionGraph() {
       renderGraph(legitimateData);
     }
   }, 2000);
+
+  // ========== Investigate Mode ==========
+  const interactWrapper = document.getElementById('graphInteractWrapper');
+  const graphOverlay = document.getElementById('graphOverlay');
+  const graphExitBtn = document.getElementById('graphExitBtn');
+
+  // Click overlay to enter investigate mode
+  graphOverlay.addEventListener('click', () => {
+    interactWrapper.classList.add('active');
+    graphOverlay.classList.add('hidden');
+  });
+
+  // Exit investigate mode
+  graphExitBtn.addEventListener('click', () => {
+    interactWrapper.classList.remove('active');
+    graphOverlay.classList.remove('hidden');
+    closeNodePopup();
+    hideTooltip();
+  });
+
+  // Click outside graph wrapper to exit investigate mode
+  document.addEventListener('click', (e) => {
+    if (interactWrapper.classList.contains('active') &&
+        !interactWrapper.contains(e.target) &&
+        !e.target.closest('.graph-toggle') &&
+        !e.target.closest('.graph-fullscreen-btn')) {
+      interactWrapper.classList.remove('active');
+      graphOverlay.classList.remove('hidden');
+      closeNodePopup();
+      hideTooltip();
+    }
+  });
+
+  // Reset investigate mode when switching graphs
+  function resetInvestigateMode() {
+    interactWrapper.classList.remove('active');
+    graphOverlay.classList.remove('hidden');
+    closeNodePopup();
+    hideTooltip();
+  }
 
   // Fullscreen toggle
   const graphContainer = document.getElementById('graphContainer');
