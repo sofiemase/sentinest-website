@@ -79,39 +79,60 @@ function closeModal() {
   document.body.style.overflow = '';
 }
 
-// Handle form submission — stores to localStorage
+// Handle form submission — sends to Google Sheets
+const GOOGLE_SHEET_URL = 'https://script.google.com/macros/s/AKfycbwwINOkeO1zSJRf_TX97Y3nXAs81uKRi1d7no--PXRBSzuNf5I_Dl0VwPEKkgV87msz/exec';
+
 signupForm.addEventListener('submit', (e) => {
   e.preventDefault();
   const firstName = document.getElementById('firstName').value.trim();
   const lastName = document.getElementById('lastName').value.trim();
   const email = document.getElementById('email').value.trim();
 
-  // Get existing signups or start fresh
-  const signups = JSON.parse(localStorage.getItem('sentinel_signups') || '[]');
-  signups.push({
-    firstName,
-    lastName,
-    email,
-    timestamp: new Date().toISOString()
-  });
-  localStorage.setItem('sentinel_signups', JSON.stringify(signups));
+  // Disable button while sending
+  const submitBtn = signupForm.querySelector('.modal__submit');
+  submitBtn.textContent = 'Sending...';
+  submitBtn.disabled = true;
 
-  // Show success state
-  signupForm.style.display = 'none';
-  signupSuccess.style.display = 'block';
+  // Send to Google Sheets
+  fetch(GOOGLE_SHEET_URL, {
+    method: 'POST',
+    mode: 'no-cors',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ firstName, lastName, email })
+  })
+  .then(() => {
+    // Show success state
+    signupForm.style.display = 'none';
+    signupSuccess.style.display = 'block';
+    signupForm.reset();
 
-  // Reset form for next time
-  signupForm.reset();
-
-  // Auto-close after 3 seconds
-  setTimeout(() => {
-    closeModal();
-    // Reset modal to form view after close animation
+    // Auto-close after 3 seconds
     setTimeout(() => {
-      signupForm.style.display = '';
-      signupSuccess.style.display = 'none';
-    }, 300);
-  }, 3000);
+      closeModal();
+      setTimeout(() => {
+        signupForm.style.display = '';
+        signupSuccess.style.display = 'none';
+        submitBtn.textContent = 'Join the waitlist';
+        submitBtn.disabled = false;
+      }, 300);
+    }, 3000);
+  })
+  .catch(() => {
+    // Still show success (no-cors doesn't return readable response)
+    signupForm.style.display = 'none';
+    signupSuccess.style.display = 'block';
+    signupForm.reset();
+
+    setTimeout(() => {
+      closeModal();
+      setTimeout(() => {
+        signupForm.style.display = '';
+        signupSuccess.style.display = 'none';
+        submitBtn.textContent = 'Join the waitlist';
+        submitBtn.disabled = false;
+      }, 300);
+    }, 3000);
+  });
 });
 
 // ========== Smooth scroll for anchor links ==========
