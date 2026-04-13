@@ -53,7 +53,7 @@ function initDecisionGraph() {
       icon: '',
       title: 'Real Conversation',
       scenario: 'A college student texts their mom asking for $15 for an Uber ride home.',
-      overview: 'This is what a <strong>safe, legitimate conversation</strong> looks like through Sentinel AI. The graph is simple, linear, and contains zero red flags. No pressure tactics, no channel switching, no contradictions. The MRI score stays well below 100.',
+      overview: 'This is what a <strong>safe, legitimate conversation</strong> looks like through Sentinest. The graph is simple, linear, and contains zero red flags. No pressure tactics, no channel switching, no contradictions. The MRI score stays well below 100.',
       phases: [
         { name: 'Single Phase', color: '#27AE60', desc: 'A short, direct exchange — request made, help given, gratitude expressed. The entire conversation takes 10 minutes.' }
       ],
@@ -154,7 +154,7 @@ function initDecisionGraph() {
       icon: '',
       title: 'Romance Scam',
       scenario: 'Margaret, 68, is contacted on Facebook Dating by "James," who claims to be a British architect. After 6 weeks he asks for $12,000.',
-      overview: 'Romance scams follow a <strong>predictable 4-phase pattern</strong> that Sentinel AI detects by mapping the full conversation graph. The scammer invests weeks building emotional dependency before manufacturing a crisis that demands money.',
+      overview: 'Romance scams follow a <strong>predictable 4-phase pattern</strong> that Sentinest detects by mapping the full conversation graph. The scammer invests weeks building emotional dependency before manufacturing a crisis that demands money.',
       phases: [
         { name: 'Trust Building (Week 1)', color: '#27AE60', desc: 'The scammer builds rapport with compliments, fake credentials, and stolen profile photos. Stories about career and family create a false sense of intimacy.' },
         { name: 'Channel Switch (Week 2)', color: '#D97706', desc: 'The conversation moves from Facebook to WhatsApp — away from platform safeguards. The scammer refuses video calls with escalating excuses.' },
@@ -229,7 +229,7 @@ function initDecisionGraph() {
       icon: '',
       title: 'Retail Scam',
       scenario: 'A user clicks an Instagram ad for 80%-off Nike Air Max shoes. The store looks professional but the product never arrives.',
-      overview: 'Fake retail scams use <strong>urgency and social proof</strong> to rush victims through checkout before they can verify the seller. Sentinel AI detects the pattern of fabricated scarcity, stolen product images, and post-purchase disappearance.',
+      overview: 'Fake retail scams use <strong>urgency and social proof</strong> to rush victims through checkout before they can verify the seller. Sentinest detects the pattern of fabricated scarcity, stolen product images, and post-purchase disappearance.',
       phases: [
         { name: 'Bait (Day 1)', color: '#27AE60', desc: 'Too-good-to-be-true pricing on a social media ad. Professional-looking site with stolen product photos and fabricated 5-star reviews.' },
         { name: 'Checkout Pressure (Day 1)', color: '#D97706', desc: 'Fake countdown timers, "only 3 left" alerts, and "12 people viewing now" messages create artificial urgency. No secure payment options.' },
@@ -307,7 +307,7 @@ function initDecisionGraph() {
       icon: '',
       title: 'Tech Support Scam',
       scenario: 'A browser popup warns "YOUR COMPUTER IS INFECTED" with a fake Microsoft logo. The victim calls the number and loses $1,999 in gift cards.',
-      overview: 'Tech support scams use <strong>fear and fake authority</strong> to take remote control of victims\' computers. Sentinel AI detects the manufactured panic, impersonation of trusted brands, and escalating financial extraction.',
+      overview: 'Tech support scams use <strong>fear and fake authority</strong> to take remote control of victims\' computers. Sentinest detects the manufactured panic, impersonation of trusted brands, and escalating financial extraction.',
       phases: [
         { name: 'Initial Scare', color: '#DC2626', desc: 'A full-screen browser popup with alarm sounds impersonates Microsoft. The tab can\'t be closed. A phone number is prominently displayed.' },
         { name: 'Fake Diagnosis', color: '#EA7B1E', desc: 'The "technician" requests remote access via AnyDesk. Normal Windows logs are presented as critical threats. "Your bank accounts are at risk."' },
@@ -396,7 +396,7 @@ function initDecisionGraph() {
       icon: '',
       title: 'Investment / Pig Butchering Scam',
       scenario: 'A "wrong number" text leads to a friendship, then a crypto trading opportunity. Over 9 weeks the victim deposits $25,500 into a fake platform.',
-      overview: 'Pig butchering scams are the <strong>most financially devastating</strong> fraud type. The scammer "fattens" the victim with fake profits before "slaughtering" — locking funds behind fake fees. Sentinel AI detects the escalating deposit pattern and platform red flags.',
+      overview: 'Pig butchering scams are the <strong>most financially devastating</strong> fraud type. The scammer "fattens" the victim with fake profits before "slaughtering" — locking funds behind fake fees. Sentinest detects the escalating deposit pattern and platform red flags.',
       phases: [
         { name: 'Social Approach (Weeks 1–2)', color: '#27AE60', desc: 'A casual "wrong number" text or LinkedIn message. The scammer shares luxury lifestyle photos and casually mentions crypto trading success.' },
         { name: 'Platform Setup (Weeks 3–4)', color: '#D97706', desc: 'Conversation moves to WhatsApp. The scammer demonstrates "profits" with fabricated screenshots and directs the victim to a fake trading platform. First deposit: $500.' },
