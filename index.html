@@ -21,7 +21,6 @@
       <div class="nav__links" id="navLinks">
         <a href="#how-it-works">How it works</a>
         <a href="#science">For platforms</a>
-        <a href="#decision-graph">Research</a>
         <a href="#testimonials">Testimonials</a>
         <button class="btn btn--primary btn--sm" id="openSignup">Get early access</button>
       </div>
@@ -289,122 +288,6 @@
     </div>
   </section>
 
-  <!-- Decision Graph -->
-  <section class="section decision-graph" id="decision-graph">
-    <div class="container">
-      <div class="section__header">
-        <span class="section__tag">THE DECISION GRAPH</span>
-        <h2 class="section__title">We don't just score the message. We map the entire manipulation.</h2>
-        <p class="section__subtitle">Traditional fraud detection asks: "Did this transaction look suspicious?" Sentinest asks: "How did the victim arrive at this decision? What influenced them?"</p>
-      </div>
-
-      <!-- Graph Toggle -->
-      <div class="graph-toggle">
-        <button class="graph-toggle__btn graph-toggle__btn--active" data-graph="legitimate">Real Conversation</button>
-        <button class="graph-toggle__btn" data-graph="romance">Romance Scam</button>
-        <button class="graph-toggle__btn" data-graph="retail">Retail Scam</button>
-        <button class="graph-toggle__btn" data-graph="techsupport">Tech Support Scam</button>
-        <button class="graph-toggle__btn" data-graph="investment">Investment Scam</button>
-      </div>
-
-      <!-- Walkthrough Panel -->
-      <div class="graph-walkthrough" id="graphWalkthrough">
-        <div class="walkthrough__header">
-          <div class="walkthrough__icon" id="walkthroughIcon"></div>
-          <div>
-            <h3 class="walkthrough__title" id="walkthroughTitle"></h3>
-            <p class="walkthrough__scenario" id="walkthroughScenario"></p>
-          </div>
-        </div>
-        <div class="walkthrough__body">
-          <div class="walkthrough__overview" id="walkthroughOverview"></div>
-          <div class="walkthrough__phases" id="walkthroughPhases"></div>
-          <div class="walkthrough__stats-row" id="walkthroughStats"></div>
-          <div class="walkthrough__result" id="walkthroughResult"></div>
-        </div>
-      </div>
-
-      <!-- Graph Container -->
-      <div class="graph-container" id="graphContainer">
-        <button class="graph-fullscreen-btn" id="graphFullscreenBtn" title="Toggle fullscreen">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 00-2 2v3m18 0V5a2 2 0 00-2-2h-3m0 18h3a2 2 0 002-2v-3M3 16v3a2 2 0 002 2h3"/></svg>
-          <span>Fullscreen</span>
-        </button>
-        <div class="graph-legend">
-          <div class="graph-legend__section">
-            <strong>Nodes:</strong>
-            <span class="graph-legend__item"><span class="graph-legend__dot graph-legend__dot--message"></span>Message</span>
-            <span class="graph-legend__item"><span class="graph-legend__dot graph-legend__dot--call"></span>Call</span>
-            <span class="graph-legend__item"><span class="graph-legend__dot graph-legend__dot--media"></span>Media</span>
-            <span class="graph-legend__item"><span class="graph-legend__dot graph-legend__dot--document"></span>Document</span>
-            <span class="graph-legend__item"><span class="graph-legend__dot graph-legend__dot--switch"></span>Channel Switch</span>
-          </div>
-          <div class="graph-legend__section">
-            <strong>Edges:</strong>
-            <span class="graph-legend__item"><span class="graph-legend__line graph-legend__line--reply"></span>Reply</span>
-            <span class="graph-legend__item"><span class="graph-legend__line graph-legend__line--pressure"></span>Pressure</span>
-            <span class="graph-legend__item"><span class="graph-legend__line graph-legend__line--contradict"></span>Contradict</span>
-            <span class="graph-legend__item"><span class="graph-legend__line graph-legend__line--build"></span>Build</span>
-          </div>
-        </div>
-        <div class="graph-interact-wrapper" id="graphInteractWrapper">
-          <div class="graph-interact-overlay" id="graphOverlay">
-            <div class="graph-interact-prompt">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 15l-2 5L9 9l11 4-5 2z"/><path d="M14.828 14.828L21 21"/></svg>
-              <span>Click to investigate graph</span>
-            </div>
-          </div>
-          <button class="graph-exit-btn" id="graphExitBtn">✕ Exit investigation</button>
-          <div id="graphSvg" class="graph-svg"></div>
-        </div>
-        <div class="graph-tooltip" id="graphTooltip"></div>
-      </div>
-
-      <!-- Scoring Categories -->
-      <div class="scoring">
-        <h3 class="scoring__title">Five Signal Categories Power the Score</h3>
-        <div class="scoring__grid">
-          <div class="scoring__card">
-            <div class="scoring__icon">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>
-            </div>
-            <h4>The Story</h4>
-            <p>Narrative integrity — fake credentials, forged documents, implausible claims</p>
-          </div>
-          <div class="scoring__card">
-            <div class="scoring__icon">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-            </div>
-            <h4>The Clock</h4>
-            <p>Urgency patterns — rushed timelines, message bursts, off-hours contact</p>
-          </div>
-          <div class="scoring__card">
-            <div class="scoring__icon">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78L12 21.23l8.84-8.84a5.5 5.5 0 000-7.78z"/></svg>
-            </div>
-            <h4>The Pressure</h4>
-            <p>Emotional manipulation — guilt, fear, scarcity, isolation tactics</p>
-          </div>
-          <div class="scoring__card">
-            <div class="scoring__icon">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 014-4h14"/><polyline points="7 23 3 19 7 15"/><path d="M21 13v2a4 4 0 01-4 4H3"/></svg>
-            </div>
-            <h4>The Hop</h4>
-            <p>Platform evasion — conversation crosses channels to avoid detection</p>
-          </div>
-          <div class="scoring__card">
-            <div class="scoring__icon">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-            </div>
-            <h4>The Person</h4>
-            <p>Identity & AI detection — deepfakes, voice cloning, behavioral anomalies</p>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
   <!-- Testimonials -->
   <section class="section testimonials" id="testimonials">
     <div class="container">
@@ -550,9 +433,7 @@
     </div>
   </div>
 
-  <script src="https://cdn.jsdelivr.net/npm/d3@7" defer></script>
   <script src="js/main.js" defer></script>
-  <script src="js/decision-graph.js" defer></script>
   <script src="js/mri-gauge.js" defer></script>
 </body>
 </html>
