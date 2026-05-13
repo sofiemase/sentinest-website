@@ -1,36 +1,18 @@
 :root {
-  /* ===== Brand Colors ===== */
-  /* Sentinest Navy — heavy text on light, dark surfaces */
-  --color-navy: #0A0F0D;
-  /* Trust Green — brand accent, depth, secondary dark surface */
-  --color-trust-green: #0D2818;
-  /* Signal Green — primary CTA, brand recognition mark, safe risk indicator */
-  --color-primary: #27AE60;
+  /* Colors */
+  --color-primary: #0F6E4A;
   --color-accent: #27AE60;
-  /* Light surface used for "safe" highlights */
   --color-surface: #E8F8F0;
-
-  /* ===== Neutrals ===== */
-  --color-bg: #F9F8F6;        /* Off-white — default light background */
-  --color-border: #EDE9E2;    /* Subtle gray — dividers, cards, inactive */
-  --color-muted: #595959;     /* Muted text — captions, secondary copy */
-  --color-ink: #0A0F0D;       /* Heavy text — same as Navy */
+  --color-bg: #FAFCFB;
+  --color-warning: #D97706;
+  --color-high-risk: #EA7B1E;
+  --color-critical: #DC2626;
+  --color-ink: #1A2E24;
   --color-white: #FFFFFF;
+  --color-border: #E0E0E0;
 
-  /* ===== MRI Risk Scale ===== */
-  --color-safe: #27AE60;       /* 0–300 Safe Green */
-  --color-warning: #F0A500;    /* 301–550 Caution Amber */
-  --color-high-risk: #E07020;  /* 551–750 Warning Orange */
-  --color-critical: #CC3333;   /* 751–1000 Critical Red */
-
-  /* ===== Typography ===== */
-  /* Headlines & marketing copy — serif gravitas */
-  --font-heading: Georgia, 'Times New Roman', 'Iowan Old Style', serif;
-  /* Body & UI — system stack, falls back through Inter where installed */
-  --font-family: -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-  /* Tabular numbers (MRI score, financial figures) */
-  --font-numeric: -apple-system, BlinkMacSystemFont, 'Inter', 'SF Pro Display', Helvetica, Arial, sans-serif;
-
+  /* Typography */
+  --font-family: Arial, Helvetica, sans-serif;
   --heading-size: 32px;
   --heading-weight: 700;
   --tag-size: 11px;
@@ -42,7 +24,7 @@
   --score-size-sm: 38px;
   --score-weight: 300;
 
-  /* ===== Spacing ===== */
+  /* Spacing */
   --space-xs: 4px;
   --space-sm: 8px;
   --space-md: 16px;
@@ -52,20 +34,20 @@
   --space-3xl: 64px;
   --space-4xl: 80px;
 
-  /* ===== Layout ===== */
+  /* Layout */
   --max-width: 1200px;
   --nav-height: 64px;
   --border-radius: 12px;
   --border-radius-sm: 8px;
   --border-radius-pill: 9999px;
 
-  /* ===== Shadows ===== */
+  /* Shadows */
   --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.08);
   --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.1);
   --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.12);
   --shadow-phone: 0 20px 60px rgba(0, 0, 0, 0.15);
 
-  /* ===== Transitions ===== */
+  /* Transitions */
   --transition-fast: 150ms ease;
   --transition-base: 300ms ease;
   --transition-slow: 500ms ease;
