@@ -394,7 +394,7 @@ function initDecisionGraph() {
     },
     walkthrough: {
       icon: '',
-      title: 'Investment / Pig Butchering Scam',
+      title: 'Crypto Scam (Pig Butchering)',
       scenario: 'A "wrong number" text leads to a friendship, then a crypto trading opportunity. Over 9 weeks the victim deposits $25,500 into a fake platform.',
       overview: 'Pig butchering scams are the <strong>most financially devastating</strong> fraud type. The scammer "fattens" the victim with fake profits before "slaughtering" — locking funds behind fake fees. Sentinest detects the escalating deposit pattern and platform red flags.',
       phases: [
