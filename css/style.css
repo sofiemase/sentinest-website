@@ -119,10 +119,16 @@ img { max-width: 100%; }
 }
 
 .nav__logo {
-  font-size: 18px;
-  font-weight: 700;
-  color: var(--color-primary);
+  display: inline-flex;
+  align-items: center;
+  height: 100%;
   white-space: nowrap;
+}
+
+.nav__logo img {
+  height: 32px;
+  width: auto;
+  display: block;
 }
 
 .nav__links {
@@ -1638,8 +1644,17 @@ img { max-width: 100%; }
 }
 
 .footer__logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
   font-size: 16px;
   font-weight: 700;
+}
+
+.footer__logo img {
+  height: 28px;
+  width: 28px;
+  display: block;
 }
 
 .footer__links {
