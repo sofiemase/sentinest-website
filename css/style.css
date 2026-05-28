@@ -121,14 +121,22 @@ img { max-width: 100%; }
 .nav__logo {
   display: inline-flex;
   align-items: center;
+  gap: 10px;
   height: 100%;
   white-space: nowrap;
+  color: var(--color-ink);
 }
 
 .nav__logo img {
   height: 32px;
-  width: auto;
+  width: 32px;
   display: block;
+}
+
+.nav__logo-text {
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: 0.01em;
 }
 
 .nav__links {
